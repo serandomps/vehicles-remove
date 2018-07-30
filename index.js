@@ -5,19 +5,16 @@ var Vehicle = require('vehicles-service');
 
 dust.loadSource(dust.compile(require('./template'), 'vehicles-remove'));
 
-module.exports = function (sandbox, fn, options) {
-    console.log('-----------1')
+module.exports = function (sandbox, options, done) {
     dust.render('vehicles-remove', {}, function (err, out) {
         if (err) {
-            console.log(err)
+            return done(err);
         }
         var el = sandbox.append(out);
         console.log(out)
         $('.remove', el).on('click', function () {
-            Vehicle.remove(options.id, function () {
-
-            })
+            Vehicle.remove(options.id, serand.none);
         })
-        fn(false, serand.none);
+        done(null, serand.none);
     });
 };
