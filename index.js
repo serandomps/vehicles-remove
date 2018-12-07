@@ -5,7 +5,8 @@ var Vehicle = require('vehicles-service');
 
 dust.loadSource(dust.compile(require('./template'), 'vehicles-remove'));
 
-module.exports = function (ctx, sandbox, options, done) {
+module.exports = function (ctx, container, options, done) {
+    var sandbox = container.sandbox;
     dust.render('vehicles-remove', {}, function (err, out) {
         if (err) {
             return done(err);
